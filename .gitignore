@@ -1,0 +1,18 @@
+# Padrão .NET (pastas de build e cache)
+[Bb]in/
+[Oo]bj/
+
+# Configurações de IDE e Usuário
+.vs/
+*.user
+*.suo
+
+# appsettings.Development.json
+appsettings.Development.json
+
+# Logs
+*.log
+
+# Pasta de Uploads
+# (A pasta onde as imagens da CNH são salvas localmente)
+rental-uploads/
