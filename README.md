@@ -27,11 +27,10 @@ O projeto foi configurado para uma inicialização "zero-atrito". Os serviços d
 
 ---
 
-### Execute o Comando
-
-```bash
 ### Iniciar os Serviços de Infraestrutura
 
 # Em um terminal na raiz do projeto, execute:
 docker-compose up -d
 # Aguarde um momento até que os containers estejam em execução.
+
+```bash
