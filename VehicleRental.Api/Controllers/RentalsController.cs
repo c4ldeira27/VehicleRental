@@ -54,9 +54,13 @@ namespace VehicleRental.Api.Controllers
             {
                 return BadRequest(new { mensagem = "O plano escolhido não é válido" });
             }
-
-            if(request.StartDate.Date != DateTime.Now.AddDays(1).Date)
+            
+            if (request.StartDate.Date != DateTime.Now.AddDays(1).Date)
                 return BadRequest(new { mensagem = "A data de início da locação deve ser o primeiro dia após a data atual." });
+
+            var expectedEndDate = request.StartDate.AddDays(request.PlanDays - 1).Date;
+            if (request.ExpectedEndDate.Date != expectedEndDate || request.EndDate.Date != expectedEndDate)
+                return BadRequest(new { mensagem = $"Datas de término/previsão inválidas. Para o plano de {request.PlanDays} dias, deve ser {expectedEndDate:yyyy-MM-dd}." });
 
 
             var rental = new Rental(
@@ -73,7 +77,7 @@ namespace VehicleRental.Api.Controllers
 
             var response = new RentalResponse(rental, dailyRate);
 
-            return CreatedAtAction(nameof(GetById), new { id = rental.Identifier });
+            return CreatedAtAction(nameof(GetById), new { id = rental.Identifier }, response);
         }
 
         [HttpGet("{id}")]
